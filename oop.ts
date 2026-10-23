@@ -100,19 +100,46 @@
 // cat.makeSound();
 
 // ** // Method Overlading
-class Calculator {
-  // ? নোট: টাইপস্ক্রিপ্টে অন্যান্য ল্যাঙ্গুয়েজের (যেমন C++ বা Java) মতো সরাসরি একাধিক মেথড ডিফাইন করে ওভারলোডিং করা যায় না। টাইপস্ক্রিপ্টে ফাংশন সিগনেচার ডিফাইন করে ওভারলোড করতে হয়:
-  // overload signature
-  add(a: number, b: number): number;
-  add(a: string, b: string): string;
+// class Calculator {
+//   // ? নোট: টাইপস্ক্রিপ্টে অন্যান্য ল্যাঙ্গুয়েজের (যেমন C++ বা Java) মতো সরাসরি একাধিক মেথড ডিফাইন করে ওভারলোডিং করা যায় না। টাইপস্ক্রিপ্টে ফাংশন সিগনেচার ডিফাইন করে ওভারলোড করতে হয়:
+//   // overload signature
+//   add(a: number, b: number): number;
+//   add(a: string, b: string): string;
 
-  // single implementation
-  add(a: any, b: any): any {
-    return a + b;
+//   // single implementation
+//   add(a: any, b: any): any {
+//     return a + b;
+//   }
+// }
+
+// const calc = new Calculator();
+
+// console.log(calc.add(10, 20));
+// console.log(calc.add('Hello', 'World!'));
+
+// ** Abstract Class vs Interface
+// abstract class example
+abstract class Shape {
+  abstract calculateArea(): number; // without calculation logic
+
+  printArea(): void {
+    console.log(`Area is: ${this.calculateArea()}`);
   }
 }
 
-const calc = new Calculator();
+class Rectangle extends Shape {
+  constructor(
+    private width: number,
+    private height: number,
+  ) {
+    super();
+  }
 
-console.log(calc.add(10, 20));
-console.log(calc.add('Hello', 'World!'));
+  // abstract method (Implementation is mandatory)
+  calculateArea(): number {
+    return this.width * this.height;
+  }
+}
+
+const rect = new Rectangle(10, 5);
+rect.printArea();
